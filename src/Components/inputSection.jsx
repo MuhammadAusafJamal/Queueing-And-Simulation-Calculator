@@ -1,5 +1,3 @@
-import React from "react";
-
 const InputSection = ({
     active,
     setArrivalMean,
@@ -201,7 +199,7 @@ const InputSection = ({
             </div>
             <div className="flex/ items-center gap-2 mx-[auto] justify-center pr-16/ relative">
                 <label
-                    className="block mb-2 text-xl flex py-2 px-4 rounded-lg font-normal text-white w-[60%] ml-auto mt-5 bg-[#242B2E] font-bold text-center "
+                    className="mb-2 text-xl flex py-2 px-4 rounded-lg text-white w-[60%] ml-auto mt-5 bg-[#242B2E] font-bold text-center "
                     htmlFor="priorityCheck"
                 >
                     {" "}

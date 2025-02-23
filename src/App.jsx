@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import InputSection from "./Components/inputSection.jsx";
+import { useEffect, useState, } from "react";
 // import SimulationGG1 from "./SimulationGG1";
 // import SimulationGG2 from "./SimulationGG2";
 // import SimulationMM1 from "./SimulationMM1";
@@ -10,7 +9,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Timer, People, HourglassEmpty, Timeline, AvTimer, BarChart, KeyboardArrowDown } from "@mui/icons-material";
 import { Collapse } from "@mui/material";
-import { gg1Queueing, ggcQueueing, mg1Queueing, mgcQueueing, mm1Queueing, mmcQueueing } from "./functions/nonPremptiveQueueingFucntions.js"
+import { gg1Queueing, ggcQueueing, mg1Queueing, mgcQueueing, mm1Queueing, mmcQueueing } from "./functions/nonPremptiveQueueingFucntions.js";
+import InputSection from './components/inputSection.jsx'
 
 export default function App() {
   const [active, setActive] = useState("M/M/2");
@@ -44,7 +44,7 @@ export default function App() {
     { label: "Proportion of time server is idle:", icon: <AvTimer /> },
     { label: "Server Utilization Time (ρ):", icon: <BarChart /> },
   ];
-  
+
 
 
 
@@ -345,7 +345,7 @@ export default function App() {
                   }
                 } else {
                   if (active === "M/M/1") {
-                   setQueueing( mm1Queueing(arrivalMean, serviceMean));
+                    setQueueing(mm1Queueing(arrivalMean, serviceMean));
                     scrollToSection("calculationSection");
                     // console.log("");
                   } else if (active === "M/M/2") {
@@ -365,14 +365,14 @@ export default function App() {
                     )
                     scrollToSection("calculationSection");
                   } else if (active === "G/G/1") {
-                   setQueueing(
-                    gg1Queueing(
-                      arrivalMean,
-                      arrivalVariance,
-                      serviceMean,
-                      serviceVariance
+                    setQueueing(
+                      gg1Queueing(
+                        arrivalMean,
+                        arrivalVariance,
+                        serviceMean,
+                        serviceVariance
+                      )
                     )
-                   )
                     scrollToSection("calculationSection");
                   } else if (active === "G/G/2") {
                     setQueueing(
