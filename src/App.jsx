@@ -36,7 +36,7 @@ export default function App() {
 
 
 
-  const queuingHeading = [
+  const queueParams = [
     { label: "Number of customers in the queue (Lq):", icon: <People /> },
     { label: "Time in queue (Wq):", icon: <HourglassEmpty /> },
     { label: "Average time spent in the system (W):", icon: <Timer /> },
@@ -44,9 +44,6 @@ export default function App() {
     { label: "Proportion of time server is idle:", icon: <AvTimer /> },
     { label: "Server Utilization Time (ρ):", icon: <BarChart /> },
   ];
-
-
-
 
 
   const [arrivalMean, setArrivalMean] = useState(0);
@@ -521,7 +518,7 @@ export default function App() {
                 Model Queuing
               </h1>
               <div className="flex flex-col gap-4 py-4 px-8">
-                {queuingHeading?.map((v, i) => (
+                {queueParams?.map((v, i) => (
                   <div key={i} className="flex w-[40%] items-center">
                     {v.icon}
                     <h1 className="ml-2">{v.label}</h1>
