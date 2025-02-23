@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import InputSection from "./components/inputSection";
+import InputSection from "./Components/inputSection.jsx";
 // import SimulationGG1 from "./SimulationGG1";
 // import SimulationGG2 from "./SimulationGG2";
 // import SimulationMM1 from "./SimulationMM1";
