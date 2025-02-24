@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Timer, People, HourglassEmpty, Timeline, AvTimer, BarChart, KeyboardArrowDown } from "@mui/icons-material";
 import { Collapse } from "@mui/material";
 import { gg1Queueing, ggcQueueing, mg1Queueing, mgcQueueing, mm1Queueing, mmcQueueing } from "./functions/nonPremptiveQueueingFucntions.js";
-import InputSection from './components/inputSection.jsx'
+import InputSection from './Components/inputSection.jsx'
 
 export default function App() {
   const [active, setActive] = useState("M/M/2");
