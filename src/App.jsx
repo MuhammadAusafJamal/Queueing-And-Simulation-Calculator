@@ -1,4 +1,4 @@
-import { useEffect, useState, } from "react";
+import { useState, } from "react";
 // import SimulationGG1 from "./SimulationGG1";
 // import SimulationGG2 from "./SimulationGG2";
 // import SimulationMM1 from "./SimulationMM1";
@@ -39,8 +39,8 @@ export default function App() {
   const queueParams = [
     { label: "Number of customers in the queue (Lq):", icon: <People /> },
     { label: "Time in queue (Wq):", icon: <HourglassEmpty /> },
-    { label: "Average time spent in the system (W):", icon: <Timer /> },
-    { label: "Average number of customers (L):", icon: <Timeline /> },
+    { label: "Average time spent in the system (Ws):", icon: <Timer /> },
+    { label: "Average number of customers (Ls):", icon: <Timeline /> },
     { label: "Proportion of time server is idle:", icon: <AvTimer /> },
     { label: "Server Utilization Time (ρ):", icon: <BarChart /> },
   ];
@@ -342,46 +342,58 @@ export default function App() {
                   }
                 } else {
                   if (active === "M/M/1") {
-                    setQueueing(mm1Queueing(arrivalMean, serviceMean));
-                    scrollToSection("calculationSection");
-                    // console.log("");
+                    const result = mm1Queueing(arrivalMean, serviceMean);
+                    if (result) {
+                      setQueueing(result);
+                      scrollToSection("calculationSection");
+                    }
                   } else if (active === "M/M/2") {
-                    setQueueing(mmcQueueing(arrivalMean, serviceMean, servers))
-                    scrollToSection("calculationSection");
+                    const result = mmcQueueing(arrivalMean, serviceMean, servers)
+                    if (result) {
+                      setQueueing(result);
+                      scrollToSection("calculationSection");
+                    }
                   } else if (active === "M/G/1") {
-                    setQueueing(mg1Queueing(arrivalMean, serviceMean, serviceVariance))
-                    scrollToSection("calculationSection");
+                    const result = mg1Queueing(arrivalMean, serviceMean, serviceVariance)
+                    if (result) {
+                      setQueueing(result);
+                      scrollToSection("calculationSection");
+                    }
                   } else if (active === "M/G/2") {
-                    setQueueing(
-                      mgcQueueing(
-                        arrivalMean,
-                        serviceMean,
-                        serviceVariance,
-                        servers
-                      )
+                    const result = mgcQueueing(
+                      arrivalMean,
+                      serviceMean,
+                      serviceVariance,
+                      servers
                     )
-                    scrollToSection("calculationSection");
+                    if (result) {
+                      setQueueing(result);
+                      scrollToSection("calculationSection");
+                    }
                   } else if (active === "G/G/1") {
-                    setQueueing(
-                      gg1Queueing(
-                        arrivalMean,
-                        arrivalVariance,
-                        serviceMean,
-                        serviceVariance
-                      )
-                    )
-                    scrollToSection("calculationSection");
+                    const result = gg1Queueing(
+                      arrivalMean,
+                      arrivalVariance,
+                      serviceMean,
+                      serviceVariance
+                    );
+                    if (result) {
+                      setQueueing(result);
+                      scrollToSection("calculationSection");
+                    }
+
                   } else if (active === "G/G/2") {
-                    setQueueing(
-                      ggcQueueing(
-                        arrivalMean,
-                        arrivalVariance,
-                        serviceMean,
-                        serviceVariance,
-                        servers
-                      )
-                    )
-                    scrollToSection("calculationSection");
+                    const result = ggcQueueing(
+                      arrivalMean,
+                      arrivalVariance,
+                      serviceMean,
+                      serviceVariance,
+                      servers
+                    );
+                    if (result) {
+                      setQueueing(result);
+                      scrollToSection("calculationSection");
+                    }
                   }
                 }
               }}
@@ -390,7 +402,7 @@ export default function App() {
             </button>
           </section>
         </main>
-      </section>
+      </section >
 
       <main className="min-h-screen pt-16 bg-[#F0F0F0]" id="calculationSection">
         {
@@ -518,6 +530,7 @@ export default function App() {
                 Model Queuing
               </h1>
               <div className="flex flex-col gap-4 py-4 px-8">
+                {/* {console.log(queueing)} */}
                 {queueParams?.map((v, i) => (
                   <div key={i} className="flex w-[40%] items-center">
                     {v.icon}
@@ -539,6 +552,6 @@ export default function App() {
             </section>
           )}
       </main>
-    </main>
+    </main >
   );
 }

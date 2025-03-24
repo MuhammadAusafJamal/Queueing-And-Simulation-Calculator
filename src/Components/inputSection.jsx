@@ -197,25 +197,30 @@ const InputSection = ({
                     ) : null
                 ) : null}
             </div>
-            <div className="flex/ items-center gap-2 mx-[auto] justify-center pr-16/ relative">
-                <label
-                    className="mb-2 text-xl flex py-2 px-4 rounded-lg text-white w-[60%] ml-auto mt-5 bg-[#242B2E] font-bold text-center "
-                    htmlFor="priorityCheck"
-                >
-                    {" "}
-                    Do you have priority in your model?
-                    <input
-                        id="priorityCheck"
-                        type="checkbox"
-                        className="w-[60%]/ w-6 p-2 border text-center rounded-md ml-auto border-black absolute/"
-                        value={usePriority}
-                        checked={usePriority}
-                        onChange={(e) => {
-                            setUsePriority(e.target.checked);
-                        }}
-                    />
-                </label>
-            </div>
+            {
+                activeCalculator === "Simulation" && (
+                    <div className="flex/ items-center gap-2 mx-[auto] justify-center pr-16/ relative">
+                        <label
+                            className="mb-2 text-xl flex py-2 px-4 rounded-lg text-white w-[60%] ml-auto mt-5 bg-[#242B2E] font-bold text-center "
+                            htmlFor="priorityCheck"
+                        >
+                            {" "}
+                            Do you have priority in your model?
+                            <input
+                                id="priorityCheck"
+                                type="checkbox"
+                                className="w-[60%]/ w-6 p-2 border text-center rounded-md ml-auto border-black absolute/"
+                                value={usePriority}
+                                checked={usePriority}
+                                onChange={(e) => {
+                                    setUsePriority(e.target.checked);
+                                }}
+                            />
+                        </label>
+                    </div>
+                )
+            }
+
         </div>
     );
 };
