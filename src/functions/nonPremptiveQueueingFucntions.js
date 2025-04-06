@@ -16,14 +16,15 @@ export const mm1Queueing = (arrivalMean, serviceMean) => {
         let idle = 1 - rho;              // Proportion of time server is idle
         let utilization = rho;           // Server utilization
 
-        return [
-            Lq.toFixed(4),    // Number of customers in the queue (Lq)
-            Wq.toFixed(4),    // Time in queue (Wq)
-            Ws.toFixed(4),    // Average time spent in the system (Ws)
-            Ls.toFixed(4),    // Average number of customers (Ls)
-            idle.toFixed(4),  // Proportion of time server is idle (P0)
-            utilization.toFixed(4) // Server Utilization Time (ρ)
-        ];
+        return {
+            lq: Lq.toFixed(4),    // Number of customers in the queue (Lq)
+            wq: Wq.toFixed(4),    // Time in queue (Wq)
+            ws: Ws.toFixed(4),    // Average time spent in the system (Ws)
+            ls: Ls.toFixed(4),    // Average number of customers (Ls)
+            idle: idle.toFixed(4),  // Proportion of time server is idle (P0)
+            utilization: utilization.toFixed(4), // Server Utilization Time (ρ)
+            rho: rho
+        }
     } else {
         console.error("Invalid input: arrivalMean and serviceMean must be greater than 0.");
         return null;
@@ -45,14 +46,15 @@ export const mg1Queueing = (arrivalMean, serviceMean, serviceVariance) => {
         let idle = 1 - P;
         let utilization = P;
 
-        return [
-            Lq.toFixed(4),    // Number of customers in the queue (Lq)
-            Wq.toFixed(4),    // Time in queue (Wq)
-            Ws.toFixed(4),    // Average time spent in the system (Ws)
-            Ls.toFixed(4),    // Average number of customers (Ls)
-            idle.toFixed(4),  // Proportion of time server is idle (P0)
-            utilization.toFixed(4)    // Server Utilization Time (ρ)
-        ];
+        return {
+            lq: Lq.toFixed(4),    // Number of customers in the queue (Lq)
+            wq: Wq.toFixed(4),    // Time in queue (Wq)
+            ws: Ws.toFixed(4),    // Average time spent in the system (Ws)
+            ls: Ls.toFixed(4),    // Average number of customers (Ls)
+            idle: idle.toFixed(4),  // Proportion of time server is idle (P0)
+            utilization: utilization.toFixed(4), // Server Utilization Time (ρ)
+            rho: P
+        }
     } else {
         console.error("Invalid input: arrivalMean, serviceMean and service variance must be greater than 0.");
         return null;
@@ -78,14 +80,15 @@ export const gg1Queueing = (arrivalMean, arrivalVariance, serviceMean, serviceVa
         let Ls = lambda * Ws;
         let idle = 1 - probability;
         let utilization = probability
-        return [
-            Lq.toFixed(4),    // Number of customers in the queue (Lq)
-            Wq.toFixed(4),    // Time in queue (Wq)
-            Ws.toFixed(4),    // Average time spent in the system (Ws)
-            Ls.toFixed(4),    // Average number of customers (Ls)
-            idle.toFixed(4),  // Proportion of time server is idle (P0)
-            utilization.toFixed(4)    // Server Utilization Time (ρ)
-        ];
+        return {
+            lq: Lq.toFixed(4),    // Number of customers in the queue (Lq)
+            wq: Wq.toFixed(4),    // Time in queue (Wq)
+            ws: Ws.toFixed(4),    // Average time spent in the system (Ws)
+            ls: Ls.toFixed(4),    // Average number of customers (Ls)
+            idle: idle.toFixed(4),  // Proportion of time server is idle (P0)
+            utilization: utilization.toFixed(4), // Server Utilization Time (ρ)
+            rho: probability
+        }
     }
     console.error("Invalid inputs: means must be positive, variances non-negative.");
     return null;
@@ -111,14 +114,15 @@ export const mmcQueueing = (arrivalMean, serviceMean, servers) => {
         let idle = p0;
         let utilization = rho;
 
-        return [
-            Lq.toFixed(4),    // Number of customers in the queue (Lq)
-            Wq.toFixed(4),    // Time in queue (Wq)
-            Ws.toFixed(4),    // Average time spent in the system (Ws)
-            Ls.toFixed(4),    // Average number of customers (Ls)
-            idle.toFixed(4),  // Proportion of time server is idle (P0)
-            utilization.toFixed(4)    // Server Utilization Time (ρ)
-        ];
+        return {
+            lq: Lq.toFixed(4),    // Number of customers in the queue (Lq)
+            wq: Wq.toFixed(4),    // Time in queue (Wq)
+            ws: Ws.toFixed(4),    // Average time spent in the system (Ws)
+            ls: Ls.toFixed(4),    // Average number of customers (Ls)
+            idle: idle.toFixed(4),  // Proportion of time server is idle (P0)
+            utilization: utilization.toFixed(4), // Server Utilization Time (ρ)
+            rho: rho
+        }
     } else {
         console.error("Invalid input: arrivalMean and serviceMean must be greater than 0, servers must be at least 1.");
         return null;
@@ -148,14 +152,15 @@ export const mgcQueueing = (arrivalMean, serviceMean, serviceVariance, servers) 
         let idle = Number(p0); // Use P0 from M/M/c as approximation
         let utilization = P;
 
-        return [
-            Lq.toFixed(4),    // Number of customers in the queue (Lq)
-            Wq.toFixed(4),    // Time in queue (Wq)
-            Ws.toFixed(4),    // Average time spent in the system (Ws)
-            Ls.toFixed(4),    // Average number of customers (Ls)
-            idle.toFixed(4),  // Proportion of time server is idle (P0)
-            utilization.toFixed(4)    // Server Utilization Time (ρ)
-        ];
+        return {
+            lq: Lq.toFixed(4),    // Number of customers in the queue (Lq)
+            wq: Wq.toFixed(4),    // Time in queue (Wq)
+            ws: Ws.toFixed(4),    // Average time spent in the system (Ws)
+            ls: Ls.toFixed(4),    // Average number of customers (Ls)
+            idle: idle.toFixed(4),  // Proportion of time server is idle (P0)
+            utilization: utilization.toFixed(4), // Server Utilization Time (ρ)
+            rho: P
+        }
     } else {
         console.error("Invalid input: arrivalMean and serviceMean must be greater than 0, serviceVariance must be non-negative, servers must be at least 1.");
         return null;
@@ -185,14 +190,15 @@ export const ggcQueueing = (arrivalMean, arrivalVariance, serviceMean, serviceVa
         let idle = Number(p0); // Approximate with M/M/c P0
         let utilization = P;
 
-        return [
-            Lq.toFixed(4),    // Number of customers in the queue (Lq)
-            Wq.toFixed(4),    // Time in queue (Wq)
-            Ws.toFixed(4),    // Average time spent in the system (Ws)
-            Ls.toFixed(4),    // Average number of customers (Ls)
-            idle.toFixed(4),  // Proportion of time server is idle (P0)
-            utilization.toFixed(4)    // Server Utilization Time (ρ)
-        ];
+        return {
+            lq: Lq.toFixed(4),    // Number of customers in the queue (Lq)
+            wq: Wq.toFixed(4),    // Time in queue (Wq)
+            ws: Ws.toFixed(4),    // Average time spent in the system (Ws)
+            ls: Ls.toFixed(4),    // Average number of customers (Ls)
+            idle: idle.toFixed(4),  // Proportion of time server is idle (P0)
+            utilization: utilization.toFixed(4), // Server Utilization Time (ρ)
+            rho: P
+        }
     } else {
         console.error("Invalid input: arrivalMean and serviceMean must be greater than 0, variances must be non-negative, servers must be at least 1.");
         return null;

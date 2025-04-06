@@ -13,6 +13,8 @@ import { gg1Queueing, ggcQueueing, mg1Queueing, mgcQueueing, mm1Queueing, mmcQue
 import InputSection from './Components/inputSection.jsx';
 import { toastNotify } from "./utils/toatsNotify.js";
 import SimulationMM1Priority from "./SimulationMM1Priority";
+import MetricsDisplay from "./Components/queueMetricsDisplay.jsx";
+import QueueVisualization from "./Components/queueVisualization.jsx";
 export default function App() {
   const [active, setActive] = useState("M/M/2");
   const scrollToSection = (sectionId) => {
@@ -72,7 +74,7 @@ export default function App() {
     <main
       className={`h-screen bg-[#F0F0F0]/ ${activeSection !== "calculationSection" ||
         activeCalculator !== "Simulation"
-        ? "overflow-hidden"
+        ? "overflow-scroll"
         : "overflow-auto"
         }`}
     >
@@ -543,34 +545,45 @@ export default function App() {
             ) : null
           ) :
             (
-              <section>
+              // <section>
+              //   <h1 className="text-center font-bold text-3xl my-1">
+              //     {active.charAt(active.length - 1) == "2"
+              //       ? active.slice(0, -1) + "C"
+              //       : active}{" "}
+              //     Model Queuing
+              //   </h1>
+              //   <div className="flex flex-col gap-4 py-4 px-8">
+              //     {/* {console.log(queueing)} */}
+              //     {/* <MetricsDisplay metrics={queueing} /> */}
+              //     {queueParams?.map((v, i) => (
+              //       <div key={i} className="flex w-[40%] items-center">
+              //         {v.icon}
+              //         <h1 className="ml-2">{v.label}</h1>
+              //         <h1 className="ml-auto">{queueing[i]}</h1>
+              //       </div>
+              //     ))}
+              //   </div>
+
+              //   <button
+              //     className={`tab-button w-32 mx-8 bg-gray-50 border styled text-lg rounded-lg block w-full/ p-2.5 dark:bg-gray-700 border-black dark:border-gray-600 dark:placeholder-gray-400 dark: dark:focus:bg-blue-400 dark:focus:border-blue-500 hover:bg-black hover:bg-border-white hover:text-white transition-all duration-500`}
+              //     onClick={() => {
+              //       scrollToSection("calculatorSection");
+              //       window.location.reload();
+              //     }}
+              //   >
+              //     Reset
+              //   </button>
+              // </section>
+              <>
                 <h1 className="text-center font-bold text-3xl my-1">
                   {active.charAt(active.length - 1) == "2"
                     ? active.slice(0, -1) + "C"
                     : active}{" "}
                   Model Queuing
                 </h1>
-                <div className="flex flex-col gap-4 py-4 px-8">
-                  {/* {console.log(queueing)} */}
-                  {queueParams?.map((v, i) => (
-                    <div key={i} className="flex w-[40%] items-center">
-                      {v.icon}
-                      <h1 className="ml-2">{v.label}</h1>
-                      <h1 className="ml-auto">{queueing[i]}</h1>
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  className={`tab-button w-32 mx-8 bg-gray-50 border styled text-lg rounded-lg block w-full/ p-2.5 dark:bg-gray-700 border-black dark:border-gray-600 dark:placeholder-gray-400 dark: dark:focus:bg-blue-400 dark:focus:border-blue-500 hover:bg-black hover:bg-border-white hover:text-white transition-all duration-500`}
-                  onClick={() => {
-                    scrollToSection("calculatorSection");
-                    window.location.reload();
-                  }}
-                >
-                  Reset
-                </button>
-              </section>
+                <MetricsDisplay metrics={queueing} />
+                <QueueVisualization metrics={queueing} numServers={servers}  activeQueModel={active}/>
+              </>
             )}
       </main>
     </main >

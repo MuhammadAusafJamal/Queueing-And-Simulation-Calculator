@@ -1,3 +1,5 @@
+import { Label } from "./ui/label";
+import { Switch } from './ui/switch'
 const InputSection = ({
     active,
     setArrivalMean,
@@ -199,25 +201,44 @@ const InputSection = ({
             </div>
             {
                 activeCalculator === "Simulation" && (
-                    <div className="flex/ items-center gap-2 mx-[auto] justify-center pr-16/ relative">
-                        <label
-                            className="mb-2 text-xl flex py-2 px-4 rounded-lg text-white w-[60%] ml-auto mt-5 bg-[#242B2E] font-bold text-center "
-                            htmlFor="priorityCheck"
-                        >
-                            {" "}
-                            Do you have priority in your model?
-                            <input
-                                id="priorityCheck"
-                                type="checkbox"
-                                className="w-[60%]/ w-6 p-2 border text-center rounded-md ml-auto border-black absolute/"
-                                value={usePriority}
+                    <>
+                        {/* <div className="flex/ items-center gap-2 mx-[auto] justify-center pr-16/ relative">
+                            <label
+                                className="mb-2 text-xl flex py-2 px-4 rounded-lg text-white w-[60%] ml-auto mt-5 bg-[#242B2E] font-bold text-center "
+                                htmlFor="priorityCheck"
+                            >
+                                {" "}
+                                Use Priority-Based Scheduling
+                                <input
+                                    id="priorityCheck"
+                                    type="checkbox"
+                                    className="w-[60%]/ w-6 p-2 border text-center rounded-md ml-auto border-black absolute/"
+                                    value={usePriority}
+                                    checked={usePriority}
+                                    onChange={(e) => {
+                                        setUsePriority(e.target.checked);
+                                    }}
+                                />
+                            </label>
+                        </div> */}
+                        <div className="flex items-center space-x-2 mt-6 justify-end">
+                            <Switch
+                                id="usePriority"
                                 checked={usePriority}
-                                onChange={(e) => {
-                                    setUsePriority(e.target.checked);
-                                }}
+                                onCheckedChange={setUsePriority}
+                                className=""
                             />
-                        </label>
-                    </div>
+                            <Label className="text-xl" htmlFor="usePriority">Use Priority-Based Scheduling</Label>
+                        </div>
+
+                        {usePriority && (
+                            <p className="text-sm text-muted-foreground mt-2 text-end">
+                                When enabled, customers will be assigned random priority levels (1-3).
+                                {/* Lower priority numbers are serviced first. */}
+                            </p>
+                        )}
+
+                    </>
                 )
             }
 
