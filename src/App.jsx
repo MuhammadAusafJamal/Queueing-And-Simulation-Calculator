@@ -5,15 +5,16 @@ import { useState, } from "react";
 // import SimulationMM2 from "./SimulationMM2";
 // import SimulationMG2 from "./SimulationMG2";
 // import SimulationMG1 from "./SimulationMG1";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Timer, People, HourglassEmpty, Timeline, AvTimer, BarChart, KeyboardArrowDown } from "@mui/icons-material";
 import { Collapse } from "@mui/material";
 import { gg1Queueing, ggcQueueing, mg1Queueing, mgcQueueing, mm1Queueing, mmcQueueing } from "./functions/nonPremptiveQueueingFucntions.js";
-import InputSection from './Components/inputSection.jsx'
-
+import InputSection from './Components/inputSection.jsx';
+import { toastNotify } from "./utils/toatsNotify.js";
+import { MMC } from "./Components/Simulation/MMC.jsx";
 export default function App() {
-  const [active, setActive] = useState("M/M/2");
+  const [active, setActive] = useState("M/M/C");
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -21,12 +22,9 @@ export default function App() {
       setActiveSection(sectionId);
     }
   };
-  const toastNotify = () =>
-    toast.error("Required feilds are missing", {
-      autoClose: 1000,
-      position: toast.POSITION.TOP_CENTER,
-    });
+
   const handleActive = (value) => {
+    console.log('value--->', value)
     setArrivalMean(0);
     setArrivalDistribution("");
     setServiceDistribution("");
@@ -68,7 +66,8 @@ export default function App() {
   const [usePriority, setUsePriority] = useState(false);
   const [open, setOpen] = useState(true);
 
-
+  // console.log(activeCalculator)
+  // console.log(active)
   return (
     <main
       className={`h-screen bg-[#F0F0F0]/ ${activeSection !== "calculationSection" ||
@@ -102,9 +101,8 @@ export default function App() {
             >
               <ul className="flex/">
                 {/* <li
-                  className={`hover:bg-[#394144] flex-1 text-center/ tracking-widest ${
-                    active === "M/M/1" ? "bg-[#394144]" : "bg-transparent"
-                  } text-white px-10 border-b py-2 text-lg text-left`}
+                  className={`hover:bg-[#394144] flex-1 text-center/ tracking-widest ${active === "M/M/1" ? "bg-[#394144]" : "bg-transparent"
+                    } text-white px-10 border-b py-2 text-lg text-left`}
                   onClick={() => {
                     handleActive("M/M/1");
                   }}
@@ -112,19 +110,17 @@ export default function App() {
                   M/M/1
                 </li>
                 <li
-                  className={`hover:bg-[#394144] flex-1 text-center/ tracking-widest ${
-                    active === "M/G/1" ? "bg-[#394144]" : "bg-transparent"
-                  } text-white px-10 border-b py-2 text-lg text-left`}
+                  className={`hover:bg-[#394144] flex-1 text-center/ tracking-widest ${active === "M/G/1" ? "bg-[#394144]" : "bg-transparent"
+                    } text-white px-10 border-b py-2 text-lg text-left`}
                   onClick={() => {
                     handleActive("M/G/1");
                   }}
                 >
                   M/G/1
-                </li> */}
-                {/* <li
-                  className={`hover:bg-[#394144] flex-1 text-center/ tracking-widest ${
-                    active === "G/G/1" ? "bg-[#394144]" : "bg-transparent"
-                  } text-white px-10 border-b py-2 text-lg text-left`}
+                </li>
+                <li
+                  className={`hover:bg-[#394144] flex-1 text-center/ tracking-widest ${active === "G/G/1" ? "bg-[#394144]" : "bg-transparent"
+                    } text-white px-10 border-b py-2 text-lg text-left`}
                   onClick={() => {
                     handleActive("G/G/1");
                   }}
@@ -135,10 +131,10 @@ export default function App() {
                   className={`hover:bg-[#394144] flex-1 text-center/ tracking-widest ${active === "M/M/2" ? "bg-[#394144]" : "bg-transparent"
                     } text-white px-10 border-b py-2 text-lg text-left`}
                   onClick={() => {
-                    handleActive("M/M/2");
+                    handleActive("M/M/C");
                   }}
                 >
-                  M/M/{activeCalculator === "Queueing" ? "C" : "C"}
+                  M/M/C
                 </li>
                 <li
                   className={`hover:bg-[#394144] flex-1 text-center/ tracking-widest ${active === "M/G/2" ? "bg-[#394144]" : "bg-transparent"
@@ -147,16 +143,16 @@ export default function App() {
                     handleActive("M/G/2");
                   }}
                 >
-                  M/G/{activeCalculator === "Queueing" ? "C" : "C"}
+                  M/G/C
                 </li>
                 <li
                   className={`hover:bg-[#394144] flex-1 text-center/ tracking-widest ${active === "G/G/2" ? "bg-[#394144]" : "bg-transparent"
                     } text-white px-10 border-b py-2 text-lg text-left`}
                   onClick={() => {
-                    // handleActive("G/G/2");
+                    handleActive("G/G/2");
                   }}
                 >
-                  G/G/{activeCalculator === "Queueing" ? "C" : "C"}
+                  G/G/C
                 </li>
                 {/* `<li
                   className={`hover:bg-[#394144] flex-1 text-center/ tracking-widest ${
@@ -269,9 +265,11 @@ export default function App() {
             <button
               className="bg-[green] hover:bg-[darkGreen] py-2 px-4 rounded-lg mt-6 text-white text-lg"
               onClick={() => {
-                console.log("Active Calculator--->", active);
+                console.log("button click", active);
+
                 if (activeCalculator === "Simulation") {
-                  if (active === "M/M/1") {
+                  if (active === "M/M/C") {
+                    console.log(activeCalculator, active)
                     if (arrivalMean > 0 && serviceMean > 0) {
                       setMm1(!mm1);
                       scrollToSection("calculationSection");
@@ -406,152 +404,176 @@ export default function App() {
 
       <main className="min-h-screen pt-16 bg-[#F0F0F0]" id="calculationSection">
         {
-          // activeCalculator === "Simulation" ? (
-          //   active === "M/M/1" ? (
-          //     <SimulationMM1
-          //       setMm1={setMm1}
-          //       mm1={mm1}
-          //       setArrivalMean={setArrivalMean}
-          //       setServiceMean={setServiceMean}
-          //       arrivalMean={arrivalMean}
-          //       serviceMean={serviceMean}
-          //       onClick={() => {
-          //         scrollToSection("calculatorSection");
-          //         window.location.reload();
-          //       }}
-          //     />
-          //   ) : active === "M/M/1Priority" ? (
-          //     <SimulationMM1Priority
-          //       setMm1={setMm1Priority}
-          //       mm1={mm1Priority}
-          //       setArrivalMean={setArrivalMean}
-          //       setServiceMean={setServiceMean}
-          //       arrivalMean={arrivalMean}
-          //       serviceMean={serviceMean}
-          //       onClick={() => {
-          //         scrollToSection("calculatorSection");
-          //         window.location.reload();
-          //       }}
-          //     />
-          //   ) : active === "M/M/2" ? (
-          //     <SimulationMM2
-          //       setMm2={setMm2}
-          //       mm2={mm2}
-          //       arrivalMean={arrivalMean}
-          //       setArrivalMean={setArrivalMean}
-          //       serviceMean={serviceMean}
-          //       setServiceMean={setServiceMean}
-          //       servers={servers}
-          //       usePriority={usePriority}
-          //       setUsePriority={setUsePriority}
-          //       onClick={() => {
-          //         scrollToSection("calculatorSection");
-          //         window.location.reload();
-          //       }}
-          //     />
-          //   ) : active === "M/G/1" ? (
-          //     <SimulationMG1
-          //       setMg1={setMg1}
-          //       mg1={mg1}
-          //       arrivalMean={arrivalMean}
-          //       setArrivalMean={setArrivalMean}
-          //       serviceDistribution={serviceDistribution}
-          //       setServiceDistribution={setServiceDistribution}
-          //       serviceMean={serviceMean}
-          //       setServiceMean={setServiceMean}
-          //       onClick={() => {
-          //         scrollToSection("calculatorSection");
-          //         window.location.reload();
-          //       }}
-          //     />
-          //   ) : active === "M/G/2" ? (
-          //     <SimulationMG2
-          //       setMg2={setMg2}
-          //       mg2={mg2}
-          //       arrivalMean={arrivalMean}
-          //       setArrivalMean={setArrivalMean}
-          //       serviceDistribution={serviceDistribution}
-          //       setServiceDistribution={setServiceDistribution}
-          //       serviceMean={serviceMean}
-          //       setServiceMean={setServiceMean}
-          //       servers={servers}
-          //       usePriority={usePriority}
-          //       setUsePriority={setUsePriority}
-          //       onClick={() => {
-          //         scrollToSection("calculatorSection");
-          //         window.location.reload();
-          //       }}
-          //     />
-          //   ) : active === "G/G/1" ? (
-          //     <SimulationGG1
-          //       setGg1={setGg1}
-          //       gg1={gg1}
-          //       arrivalMean={arrivalMean}
-          //       setArrivalMean={setArrivalMean}
-          //       arrivalDistribution={arrivalDistribution}
-          //       setArrivalDistribution={setArrivalDistribution}
-          //       serviceDistribution={serviceDistribution}
-          //       setServiceDistribution={setServiceDistribution}
-          //       serviceMean={serviceMean}
-          //       setServiceMean={setServiceMean}
-          //       onClick={() => {
-          //         scrollToSection("calculatorSection");
-          //         window.location.reload();
-          //       }}
-          //     />
-          //   ) : active === "G/G/2" ? (
-          //     <SimulationGG2
-          //       setGg2={setGg2}
-          //       gg2={gg2}
-          //       arrivalMean={arrivalMean}
-          //       setArrivalMean={setArrivalMean}
-          //       arrivalDistribution={arrivalDistribution}
-          //       setArrivalDistribution={setArrivalDistribution}
-          //       serviceDistribution={serviceDistribution}
-          //       setServiceDistribution={setServiceDistribution}
-          //       serviceMean={serviceMean}
-          //       servers={servers}
-          //       setServiceMean={setServiceMean}
-          //       usePriority={usePriority}
-          //       setUsePriority={setUsePriority}
-          //       onClick={() => {
-          //         scrollToSection("calculatorSection");
-          //         window.location.reload();
-          //       }}
-          //     />
-          //   ) : null
-          // ) :
-          (
-            <section>
-              <h1 className="text-center font-bold text-3xl my-1">
-                {active.charAt(active.length - 1) == "2"
-                  ? active.slice(0, -1) + "C"
-                  : active}{" "}
-                Model Queuing
-              </h1>
-              <div className="flex flex-col gap-4 py-4 px-8">
-                {/* {console.log(queueing)} */}
-                {queueParams?.map((v, i) => (
-                  <div key={i} className="flex w-[40%] items-center">
-                    {v.icon}
-                    <h1 className="ml-2">{v.label}</h1>
-                    <h1 className="ml-auto">{queueing[i]}</h1>
-                  </div>
-                ))}
-              </div>
-
-              <button
-                className={`tab-button w-32 mx-8 bg-gray-50 border styled text-lg rounded-lg block w-full/ p-2.5 dark:bg-gray-700 border-black dark:border-gray-600 dark:placeholder-gray-400 dark: dark:focus:bg-blue-400 dark:focus:border-blue-500 hover:bg-black hover:bg-border-white hover:text-white transition-all duration-500`}
+          activeCalculator === "Simulation" ? (
+            active === "M/M/C" ? (
+              // <MM1
+              //   setMm1={setMm1}
+              //   mm1={mm1}
+              //   setArrivalMean={setArrivalMean}
+              //   setServiceMean={setServiceMean}
+              //   arrivalMean={arrivalMean}
+              //   serviceMean={serviceMean}
+              //   onClick={() => {
+              //     scrollToSection("calculatorSection");
+              //     window.location.reload();
+              //   }}
+              // />
+              <MMC
+                setMm1={setMm1}
+                mm1={mm1}
+                setArrivalMean={setArrivalMean}
+                setServiceMean={setServiceMean}
+                arrivalMean={arrivalMean}
+                serviceMean={serviceMean}
+                mm1Priority={usePriority}
+                setMm1Priority={setUsePriority}
+                servers={servers}
                 onClick={() => {
                   scrollToSection("calculatorSection");
                   window.location.reload();
                 }}
-              >
-                Reset
-              </button>
-            </section>
-          )}
+              />
+            ) : active === "M/M/1Priority" ? (
+              // <SimulationMM1Priority
+              //   setMm1={setMm1Priority}
+              //   mm1={mm1Priority}
+              //   setArrivalMean={setArrivalMean}
+              //   setServiceMean={setServiceMean}
+              //   arrivalMean={arrivalMean}
+              //   serviceMean={serviceMean}
+              //   onClick={() => {
+              //     scrollToSection("calculatorSection");
+              //     window.location.reload();
+              //   }}
+              // />
+              <></>
+            ) : active === "M/M/2" ? (
+              // <SimulationMM2
+              //   setMm2={setMm2}
+              //   mm2={mm2}
+              //   arrivalMean={arrivalMean}
+              //   setArrivalMean={setArrivalMean}
+              //   serviceMean={serviceMean}
+              //   setServiceMean={setServiceMean}
+              //   servers={servers}
+              //   usePriority={usePriority}
+              //   setUsePriority={setUsePriority}
+              //   onClick={() => {
+              //     scrollToSection("calculatorSection");
+              //     window.location.reload();
+              //   }}
+              // />
+              <>AUSAG</>
+            ) : active === "M/G/1" ? (
+              // <SimulationMG1
+              //   setMg1={setMg1}
+              //   mg1={mg1}
+              //   arrivalMean={arrivalMean}
+              //   setArrivalMean={setArrivalMean}
+              //   serviceDistribution={serviceDistribution}
+              //   setServiceDistribution={setServiceDistribution}
+              //   serviceMean={serviceMean}
+              //   setServiceMean={setServiceMean}
+              //   onClick={() => {
+              //     scrollToSection("calculatorSection");
+              //     window.location.reload();
+              //   }}
+              // />
+              <></>
+            ) : active === "M/G/2" ? (
+              // <SimulationMG2
+              //   setMg2={setMg2}
+              //   mg2={mg2}
+              //   arrivalMean={arrivalMean}
+              //   setArrivalMean={setArrivalMean}
+              //   serviceDistribution={serviceDistribution}
+              //   setServiceDistribution={setServiceDistribution}
+              //   serviceMean={serviceMean}
+              //   setServiceMean={setServiceMean}
+              //   servers={servers}
+              //   usePriority={usePriority}
+              //   setUsePriority={setUsePriority}
+              //   onClick={() => {
+              //     scrollToSection("calculatorSection");
+              //     window.location.reload();
+              //   }}
+              // />
+              <></>
+            ) : active === "G/G/1" ? (
+              // <SimulationGG1
+              //   setGg1={setGg1}
+              //   gg1={gg1}
+              //   arrivalMean={arrivalMean}
+              //   setArrivalMean={setArrivalMean}
+              //   arrivalDistribution={arrivalDistribution}
+              //   setArrivalDistribution={setArrivalDistribution}
+              //   serviceDistribution={serviceDistribution}
+              //   setServiceDistribution={setServiceDistribution}
+              //   serviceMean={serviceMean}
+              //   setServiceMean={setServiceMean}
+              //   onClick={() => {
+              //     scrollToSection("calculatorSection");
+              //     window.location.reload();
+              //   }}
+              // />
+              <></>
+            ) : active === "G/G/2" ? (
+              // <SimulationGG2
+              //   setGg2={setGg2}
+              //   gg2={gg2}
+              //   arrivalMean={arrivalMean}
+              //   setArrivalMean={setArrivalMean}
+              //   arrivalDistribution={arrivalDistribution}
+              //   setArrivalDistribution={setArrivalDistribution}
+              //   serviceDistribution={serviceDistribution}
+              //   setServiceDistribution={setServiceDistribution}
+              //   serviceMean={serviceMean}
+              //   servers={servers}
+              //   setServiceMean={setServiceMean}
+              //   usePriority={usePriority}
+              //   setUsePriority={setUsePriority}
+              //   onClick={() => {
+              //     scrollToSection("calculatorSection");
+              //     window.location.reload();
+              //   }}
+              // />
+              <></>
+            ) : null
+          ) :
+            (
+              <section>
+                <h1 className="text-center font-bold text-3xl my-1">
+                  {active.charAt(active.length - 1) == "2"
+                    ? active.slice(0, -1) + "C"
+                    : active}{" "}
+                  Model Queuing
+                </h1>
+                <div className="flex flex-col gap-4 py-4 px-8">
+                  {/* {console.log(queueing)} */}
+                  {queueParams?.map((v, i) => (
+                    <div key={i} className="flex w-[40%] items-center">
+                      {v.icon}
+                      <h1 className="ml-2">{v.label}</h1>
+                      <h1 className="ml-auto">{queueing[i]}</h1>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  className={`tab-button w-32 mx-8 bg-gray-50 border styled text-lg rounded-lg block w-full/ p-2.5 dark:bg-gray-700 border-black dark:border-gray-600 dark:placeholder-gray-400 dark: dark:focus:bg-blue-400 dark:focus:border-blue-500 hover:bg-black hover:bg-border-white hover:text-white transition-all duration-500`}
+                  onClick={() => {
+                    scrollToSection("calculatorSection");
+                    window.location.reload();
+                  }}
+                >
+                  Reset
+                </button>
+              </section>
+            )}
       </main>
     </main >
   );
 }
+
+
+

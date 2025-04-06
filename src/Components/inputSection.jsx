@@ -74,7 +74,7 @@ const InputSection = ({
                 </div>
 
                 {activeCalculator === "Simulation" ? (
-                    active === "M/G/1" ||
+                    active === "M/G/C" ||
                         active === "M/G/2" ||
                         active === "G/G/1" ||
                         active === "G/G/2" ? (
@@ -159,7 +159,7 @@ const InputSection = ({
                     />
                 </div>
                 {activeCalculator === "Simulation" ? (
-                    active === "M/M/2" || active === "M/G/2" || active === "G/G/2" ? (
+                    active === "M/M/C" || active === "M/G/2" || active === "G/G/2" ? (
                         <div className="flex items-center gap-16/ ml/-[auto] justify-between/ pr-16/ ">
                             <label
                                 className="block mb-2 text-xl font-bold text-center/ "
