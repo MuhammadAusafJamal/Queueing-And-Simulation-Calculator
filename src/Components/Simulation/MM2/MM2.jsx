@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import RandomDataTab from "./Simulation/MM2/RandomDataTabMM2.jsx";
-import CalculatedDataTab from "./Simulation/MM2/CalculatedDataTabMM2.jsx";
-import GraphicalViewTab from "./Simulation/MM2/GraphicalViewTabMM2.jsx";
-import CalculatedDataTabP from "./Simulation/MM1Priority/CalculatedDataTabMM1.jsx";
-import GraphicalViewTabP from "./Simulation/MM1Priority/GraphicalViewTabMM1.jsx";
+import RandomDataTab from "./MM2Tabs/RandomDataTabMM2";
+import CalculatedDataTab from "./MM2Tabs/CalculatedDataTabMM2";
+import GraphicalViewTab from "./MM2Tabs/GraphicalViewTabMM2";
+import CalculatedDataTabP from "../MM1/MM1PriorityTabs/CalculatedDataTabMM1";
+import GraphicalViewTabP from "../MM1/MM1PriorityTabs/GraphicalViewTabMM1";
 
 import {
   generateRandomDataFunc,
   factorialIterative,
   calculateCalculatedData,
-} from "./functions/functions";
+} from "../../../functions/functions";
 
 const SimulationMM2 = ({
   setMm2,

@@ -1,4 +1,5 @@
 import { SimulationMM1 } from "./MM1"
+import { SimulationMM2 } from "./MM2"
 
 
 
@@ -7,6 +8,8 @@ export const MMC = ({
     servers,
     setMm1,
     mm1,
+    setMm2,
+    mm2,
     setArrivalMean,
     setServiceMean,
     arrivalMean,
@@ -32,16 +35,18 @@ export const MMC = ({
                 mm1Priority={mm1Priority}
             />
         ) : (
-            // <MM1
-            //     setMm1={setMm1}
-            //     mm1={mm1}
-            //     setArrivalMean={setArrivalMean}
-            //     setServiceMean={setServiceMean}
-            //     arrivalMean={arrivalMean}
-            //     serviceMean={serviceMean}
-            //     onClick={onClick}
-            // />
-            <>Simulaton MM1 Priority Asuaf</>
+            <SimulationMM2
+                setMm2={setMm2}
+                mm2={mm2}
+                mm2Priority={mm1Priority}
+                setMm2Priority={setMm1Priority}
+                setArrivalMean={setArrivalMean}
+                setServiceMean={setServiceMean}
+                arrivalMean={arrivalMean}
+                serviceMean={serviceMean}
+                onClick={onClick}
+            />
+            // <>Simulaton MM1 Priority Asuaf</>
 
         )
     )

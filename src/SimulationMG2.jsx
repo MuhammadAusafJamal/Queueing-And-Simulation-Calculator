@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import RandomDataTab from "./Simulation/MM2/RandomDataTabMM2";
-import CalculatedDataTab from "./Simulation/MM2/CalculatedDataTabMM2";
-import GraphicalViewTab from "./Simulation/MM2/GraphicalViewTabMM2";
-import CalculatedDataTabP from "./Simulation/MM1Priority/CalculatedDataTabMM1";
-import GraphicalViewTabP from "./Simulation/MM1Priority/GraphicalViewTabMM1";
+import RandomDataTab from "./Simulation/MM2/RandomDataTabMM2.jsx";
+import CalculatedDataTab from "./Simulation/MM2/CalculatedDataTabMM2.jsx";
+import GraphicalViewTab from "./Simulation/MM2/GraphicalViewTabMM2.jsx";
+import CalculatedDataTabP from "./Simulation/MM1Priority/CalculatedDataTabMM1.jsx";
+import GraphicalViewTabP from "./Simulation/MM1Priority/GraphicalViewTabMM1.jsx";
 import {
   generateRandomDataFunc,
   factorialIterative,

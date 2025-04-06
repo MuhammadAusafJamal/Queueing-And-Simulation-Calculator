@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 //
-import RandomDataTab from "./Simulation/MM1Priority/RandomDataTabMM1";
-import CalculatedDataTab from "./Simulation/MM1Priority/CalculatedDataTabMM1";
-import GraphicalViewTab from "./Simulation/MM1Priority/GraphicalViewTabMM1";
+import RandomDataTab from "./Simulation/MM1Priority/RandomDataTabMM1.jsx";
+import CalculatedDataTab from "./Simulation/MM1Priority/CalculatedDataTabMM1.jsx";
+import GraphicalViewTab from "./Simulation/MM1Priority/GraphicalViewTabMM1.jsx";
 import "./App.css";
 import {
   generateRandomDataFunc,

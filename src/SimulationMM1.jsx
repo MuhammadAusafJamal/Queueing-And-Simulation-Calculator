@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 //
-import RandomDataTab from "./Simulation/MM1/RandomDataTabMM1";
-import CalculatedDataTab from "./Simulation/MM1/CalculatedDataTabMM1";
-import GraphicalViewTab from "./Simulation/MM1/GraphicalViewTabMM1";
+import RandomDataTab from "./Simulation/MM1/RandomDataTabMM1.jsx";
+import CalculatedDataTab from "./Simulation/MM1/CalculatedDataTabMM1.jsx";
+import GraphicalViewTab from "./Simulation/MM1/GraphicalViewTabMM1.jsx";
 import "./App.css";
 
-import { generateRandomDataFunc, factorialIterative, generatePriority } from "./functions";
+import { generateRandomDataFunc, factorialIterative, generatePriority } from "./functions/functions";
 //
 
 const SimulationMM1 = ({

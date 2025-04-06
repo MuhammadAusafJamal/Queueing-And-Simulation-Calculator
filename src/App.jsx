@@ -1,10 +1,10 @@
 import { useState, } from "react";
-// import SimulationGG1 from "./SimulationGG1";
-// import SimulationGG2 from "./SimulationGG2";
-// import SimulationMM1 from "./SimulationMM1";
-// import SimulationMM2 from "./SimulationMM2";
-// import SimulationMG2 from "./SimulationMG2";
-// import SimulationMG1 from "./SimulationMG1";
+import SimulationGG1 from "./SimulationGG1";
+import SimulationGG2 from "./SimulationGG2";
+import SimulationMM1 from "./SimulationMM1";
+import SimulationMM2 from "./SimulationMM2";
+import SimulationMG2 from "./SimulationMG2";
+import SimulationMG1 from "./SimulationMG1";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Timer, People, HourglassEmpty, Timeline, AvTimer, BarChart, KeyboardArrowDown } from "@mui/icons-material";
@@ -12,9 +12,9 @@ import { Collapse } from "@mui/material";
 import { gg1Queueing, ggcQueueing, mg1Queueing, mgcQueueing, mm1Queueing, mmcQueueing } from "./functions/nonPremptiveQueueingFucntions.js";
 import InputSection from './Components/inputSection.jsx';
 import { toastNotify } from "./utils/toatsNotify.js";
-import { MMC } from "./Components/Simulation/MMC.jsx";
+import SimulationMM1Priority from "./SimulationMM1Priority";
 export default function App() {
-  const [active, setActive] = useState("M/M/C");
+  const [active, setActive] = useState("M/M/2");
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -131,7 +131,7 @@ export default function App() {
                   className={`hover:bg-[#394144] flex-1 text-center/ tracking-widest ${active === "M/M/2" ? "bg-[#394144]" : "bg-transparent"
                     } text-white px-10 border-b py-2 text-lg text-left`}
                   onClick={() => {
-                    handleActive("M/M/C");
+                    handleActive("M/M/2");
                   }}
                 >
                   M/M/C
@@ -268,7 +268,7 @@ export default function App() {
                 console.log("button click", active);
 
                 if (activeCalculator === "Simulation") {
-                  if (active === "M/M/C") {
+                  if (active === "M/M/1") {
                     console.log(activeCalculator, active)
                     if (arrivalMean > 0 && serviceMean > 0) {
                       setMm1(!mm1);
@@ -405,139 +405,141 @@ export default function App() {
       <main className="min-h-screen pt-16 bg-[#F0F0F0]" id="calculationSection">
         {
           activeCalculator === "Simulation" ? (
-            active === "M/M/C" ? (
-              // <MM1
-              //   setMm1={setMm1}
-              //   mm1={mm1}
-              //   setArrivalMean={setArrivalMean}
-              //   setServiceMean={setServiceMean}
-              //   arrivalMean={arrivalMean}
-              //   serviceMean={serviceMean}
-              //   onClick={() => {
-              //     scrollToSection("calculatorSection");
-              //     window.location.reload();
-              //   }}
-              // />
-              <MMC
+            active === "M/M/1" ? (
+              <SimulationMM1
                 setMm1={setMm1}
                 mm1={mm1}
                 setArrivalMean={setArrivalMean}
                 setServiceMean={setServiceMean}
                 arrivalMean={arrivalMean}
                 serviceMean={serviceMean}
-                mm1Priority={usePriority}
-                setMm1Priority={setUsePriority}
-                servers={servers}
                 onClick={() => {
                   scrollToSection("calculatorSection");
                   window.location.reload();
                 }}
               />
-            ) : active === "M/M/1Priority" ? (
-              // <SimulationMM1Priority
-              //   setMm1={setMm1Priority}
-              //   mm1={mm1Priority}
-              //   setArrivalMean={setArrivalMean}
-              //   setServiceMean={setServiceMean}
-              //   arrivalMean={arrivalMean}
-              //   serviceMean={serviceMean}
-              //   onClick={() => {
-              //     scrollToSection("calculatorSection");
-              //     window.location.reload();
-              //   }}
-              // />
-              <></>
-            ) : active === "M/M/2" ? (
-              // <SimulationMM2
+              // <MMC
+              //   setMm1={setMm1}
+              //   mm1={mm1}
               //   setMm2={setMm2}
               //   mm2={mm2}
-              //   arrivalMean={arrivalMean}
               //   setArrivalMean={setArrivalMean}
-              //   serviceMean={serviceMean}
               //   setServiceMean={setServiceMean}
+              //   arrivalMean={arrivalMean}
+              //   serviceMean={serviceMean}
+              //   mm1Priority={usePriority}
+              //   setMm1Priority={setUsePriority}
               //   servers={servers}
-              //   usePriority={usePriority}
-              //   setUsePriority={setUsePriority}
               //   onClick={() => {
               //     scrollToSection("calculatorSection");
               //     window.location.reload();
               //   }}
               // />
-              <>AUSAG</>
+            ) : active === "M/M/1Priority" ? (
+              <SimulationMM1Priority
+                setMm1={setMm1Priority}
+                mm1={mm1Priority}
+                setArrivalMean={setArrivalMean}
+                setServiceMean={setServiceMean}
+                arrivalMean={arrivalMean}
+                serviceMean={serviceMean}
+                onClick={() => {
+                  scrollToSection("calculatorSection");
+                  window.location.reload();
+                }}
+              />
+              // <></>
+            ) : active === "M/M/2" ? (
+              <SimulationMM2
+                setMm2={setMm2}
+                mm2={mm2}
+                arrivalMean={arrivalMean}
+                setArrivalMean={setArrivalMean}
+                serviceMean={serviceMean}
+                setServiceMean={setServiceMean}
+                servers={servers}
+                usePriority={usePriority}
+                setUsePriority={setUsePriority}
+                onClick={() => {
+                  scrollToSection("calculatorSection");
+                  window.location.reload();
+                }}
+              />
+              // <>AUSAG</>
             ) : active === "M/G/1" ? (
-              // <SimulationMG1
-              //   setMg1={setMg1}
-              //   mg1={mg1}
-              //   arrivalMean={arrivalMean}
-              //   setArrivalMean={setArrivalMean}
-              //   serviceDistribution={serviceDistribution}
-              //   setServiceDistribution={setServiceDistribution}
-              //   serviceMean={serviceMean}
-              //   setServiceMean={setServiceMean}
-              //   onClick={() => {
-              //     scrollToSection("calculatorSection");
-              //     window.location.reload();
-              //   }}
-              // />
-              <></>
+              <SimulationMG1
+                setMg1={setMg1}
+                mg1={mg1}
+                arrivalMean={arrivalMean}
+                setArrivalMean={setArrivalMean}
+                serviceDistribution={serviceDistribution}
+                setServiceDistribution={setServiceDistribution}
+                serviceMean={serviceMean}
+                setServiceMean={setServiceMean}
+                onClick={() => {
+                  scrollToSection("calculatorSection");
+                  window.location.reload();
+                }}
+              />
+              // <></>
             ) : active === "M/G/2" ? (
-              // <SimulationMG2
-              //   setMg2={setMg2}
-              //   mg2={mg2}
-              //   arrivalMean={arrivalMean}
-              //   setArrivalMean={setArrivalMean}
-              //   serviceDistribution={serviceDistribution}
-              //   setServiceDistribution={setServiceDistribution}
-              //   serviceMean={serviceMean}
-              //   setServiceMean={setServiceMean}
-              //   servers={servers}
-              //   usePriority={usePriority}
-              //   setUsePriority={setUsePriority}
-              //   onClick={() => {
-              //     scrollToSection("calculatorSection");
-              //     window.location.reload();
-              //   }}
-              // />
-              <></>
+              <SimulationMG2
+                setMg2={setMg2}
+                mg2={mg2}
+                arrivalMean={arrivalMean}
+                setArrivalMean={setArrivalMean}
+                serviceDistribution={serviceDistribution}
+                setServiceDistribution={setServiceDistribution}
+                serviceMean={serviceMean}
+                setServiceMean={setServiceMean}
+                servers={servers}
+                usePriority={usePriority}
+                setUsePriority={setUsePriority}
+                onClick={() => {
+                  scrollToSection("calculatorSection");
+                  window.location.reload();
+                }}
+              />
+              // <></>
             ) : active === "G/G/1" ? (
-              // <SimulationGG1
-              //   setGg1={setGg1}
-              //   gg1={gg1}
-              //   arrivalMean={arrivalMean}
-              //   setArrivalMean={setArrivalMean}
-              //   arrivalDistribution={arrivalDistribution}
-              //   setArrivalDistribution={setArrivalDistribution}
-              //   serviceDistribution={serviceDistribution}
-              //   setServiceDistribution={setServiceDistribution}
-              //   serviceMean={serviceMean}
-              //   setServiceMean={setServiceMean}
-              //   onClick={() => {
-              //     scrollToSection("calculatorSection");
-              //     window.location.reload();
-              //   }}
-              // />
-              <></>
+              <SimulationGG1
+                setGg1={setGg1}
+                gg1={gg1}
+                arrivalMean={arrivalMean}
+                setArrivalMean={setArrivalMean}
+                arrivalDistribution={arrivalDistribution}
+                setArrivalDistribution={setArrivalDistribution}
+                serviceDistribution={serviceDistribution}
+                setServiceDistribution={setServiceDistribution}
+                serviceMean={serviceMean}
+                setServiceMean={setServiceMean}
+                onClick={() => {
+                  scrollToSection("calculatorSection");
+                  window.location.reload();
+                }}
+              />
+              // <></>
             ) : active === "G/G/2" ? (
-              // <SimulationGG2
-              //   setGg2={setGg2}
-              //   gg2={gg2}
-              //   arrivalMean={arrivalMean}
-              //   setArrivalMean={setArrivalMean}
-              //   arrivalDistribution={arrivalDistribution}
-              //   setArrivalDistribution={setArrivalDistribution}
-              //   serviceDistribution={serviceDistribution}
-              //   setServiceDistribution={setServiceDistribution}
-              //   serviceMean={serviceMean}
-              //   servers={servers}
-              //   setServiceMean={setServiceMean}
-              //   usePriority={usePriority}
-              //   setUsePriority={setUsePriority}
-              //   onClick={() => {
-              //     scrollToSection("calculatorSection");
-              //     window.location.reload();
-              //   }}
-              // />
-              <></>
+              <SimulationGG2
+                setGg2={setGg2}
+                gg2={gg2}
+                arrivalMean={arrivalMean}
+                setArrivalMean={setArrivalMean}
+                arrivalDistribution={arrivalDistribution}
+                setArrivalDistribution={setArrivalDistribution}
+                serviceDistribution={serviceDistribution}
+                setServiceDistribution={setServiceDistribution}
+                serviceMean={serviceMean}
+                servers={servers}
+                setServiceMean={setServiceMean}
+                usePriority={usePriority}
+                setUsePriority={setUsePriority}
+                onClick={() => {
+                  scrollToSection("calculatorSection");
+                  window.location.reload();
+                }}
+              />
+              // <></>
             ) : null
           ) :
             (

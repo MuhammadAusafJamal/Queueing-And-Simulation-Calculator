@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import RandomDataTabGG1 from "./Simulation/GG1/RandomDataTabGG1";
 import CalculatedDataTabGG1 from "./Simulation/GG1/CalculatedDataTabGG1";
 import GraphicalViewTabGG1 from "./Simulation/GG1/GraphicalViewTabGG1";
-import { generateRandomDataFunc } from "./functions";
+import { generateRandomDataFunc, factorialIterative, generatePriority } from "./functions/functions";
 
 const SimulationGG1 = ({
   setGg1,

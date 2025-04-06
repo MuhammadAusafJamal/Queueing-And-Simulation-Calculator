@@ -92,35 +92,6 @@ export const MM1 = ({
         return data;
     };
 
-    // const intialFunc = (mean) => {
-    //   if (probility === 0) {
-    //     generateRandomTime(mean);
-
-    //     setProbabilty(1);
-    //     return;
-    //   }
-
-    //   poisonGenetrate(mean, probility);
-    //   setProbabilty(probility + 1);
-
-    //   // do {
-    //   //   generateRandomTime(mean);
-    //   //   i = 1;
-    //   // } while (poisonGenetrate(mean, i));
-    // };
-    // const poisonGenetrate = (mean, x) => {
-    //   let fact = factorialIterative(x);
-    //   let val = (Math.exp ** -mean * mean ** x) / fact;
-    //   console.log(val);
-    //   // if ((Math.exp ** -mean * mean ** x) / fact == 1) {
-    //   //   console.log((Math.exp ** -mean * mean ** x) / fact);
-    //   //   return false;
-    //   // } else {
-    //   //   setProbabilty(1);
-    //   //   return true;
-    //   // }
-    // };
-
     const generateRandomTime = (mean) => {
         // Generate a random number between 0 and 1
         const randomNumber = Math.random();

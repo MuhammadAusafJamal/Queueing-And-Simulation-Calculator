@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import RandomDataTabMG1 from "./Simulation/MG1/RandomDataTabMG1";
-import CalculatedDataTabMG1 from "./Simulation/MG1/CalculatedDataTabMG1";
-import GraphicalViewTabMG1 from "./Simulation/MG1/GraphicalViewTabMG1";
+import RandomDataTabMG1 from "./Simulation/MG1/RandomDataTabMG1.jsx";
+import CalculatedDataTabMG1 from "./Simulation/MG1/CalculatedDataTabMG1.jsx";
+import GraphicalViewTabMG1 from "./Simulation/MG1/GraphicalViewTabMG1.jsx";
 
 import { generateRandomDataFunc, factorialIterative } from "./functions/functions";
 

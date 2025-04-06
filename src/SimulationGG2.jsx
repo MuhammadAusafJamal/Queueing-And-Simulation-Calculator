@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 
 import RandomDataTab from "./Simulation/MM2/RandomDataTabMM2";
 import CalculatedDataTab from "./Simulation/MM2/CalculatedDataTabMM2";

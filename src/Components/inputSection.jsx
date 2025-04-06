@@ -48,7 +48,7 @@ const InputSection = ({
                                 onChange={(e) => setArrivalDistribution(e.target.value)}
                             >
                                 <option value="" disabled>
-                                    Select a distribution
+                                    Selectdistribution
                                 </option>
                                 <option value="gamma">Gamma Distribution</option>
                                 <option value="normal">Normal Distribution</option>
@@ -159,7 +159,7 @@ const InputSection = ({
                     />
                 </div>
                 {activeCalculator === "Simulation" ? (
-                    active === "M/M/C" || active === "M/G/2" || active === "G/G/2" ? (
+                    active === "M/M/2" || active === "M/G/2" || active === "G/G/2" ? (
                         <div className="flex items-center gap-16/ ml/-[auto] justify-between/ pr-16/ ">
                             <label
                                 className="block mb-2 text-xl font-bold text-center/ "
