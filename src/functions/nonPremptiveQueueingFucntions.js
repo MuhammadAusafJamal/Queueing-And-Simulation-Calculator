@@ -183,8 +183,8 @@ export const ggcQueueing = (arrivalMean, arrivalVariance, serviceMean, serviceVa
         // let [LqMGC, , , , p0] = mgcQueueing(arrivalMean, serviceMean, serviceVariance, servers);
 
         let MGC = mgcQueueing(arrivalMean, serviceMean, serviceVariance, servers);
-        let LqMGC = MMC.lq
-        let p0 = MMC.idle
+        let LqMGC = MGC.lq
+        let p0 = MGC.idle
         if (LqMGC === null) return null;
 
         // Adjust Wq for general arrivals
