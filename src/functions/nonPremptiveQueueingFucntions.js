@@ -188,7 +188,8 @@ export const ggcQueueing = (arrivalMean, arrivalVariance, serviceMean, serviceVa
         if (LqMGC === null) return null;
 
         // Adjust Wq for general arrivals
-        let WqMMC = mmcQueueing(arrivalMean, serviceMean, servers)[0] / lambda; // Base M/M/c Wq
+        let MMC = mmcQueueing(arrivalMean, serviceMean, servers) ; // Base M/M/c Wq
+        let WqMMC = MMC.wq / lambda
         let Wq = WqMMC * ((Ca2 + Cs2) / 2); // Single adjustment for G/G/c
         let Lq = lambda * Wq;
         let Ws = Wq + 1 / mu;
