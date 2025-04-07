@@ -146,11 +146,11 @@ const QueueVisualization = ({ metrics, numServers, activeQueModel }) => {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                         <div>
                             <div className="text-gray-500">Utilization:</div>
-                            <div className="font-semibold">{Math.round((metrics.utilization) * 100)}%</div>
+                            <div className="font-semibold">{(metrics.utilization) * 100}%</div>
                         </div>
                         <div>
                             <div className="text-gray-500">Idle Time:</div>
-                            <div className="font-semibold">{Math.round((metrics.idle) * 100)}%</div>
+                            <div className="font-semibold">{((metrics.idle) * 100)}%</div>
                         </div>
                         <div>
                             <div className="text-gray-500">Traffic Intensity (ρ):</div>

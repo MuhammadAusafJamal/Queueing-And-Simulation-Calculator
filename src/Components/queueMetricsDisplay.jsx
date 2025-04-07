@@ -75,7 +75,7 @@ const MetricsDisplay = ({ metrics }) => {
                 </CardHeader>
                 <CardContent>
                     <div className="flex items-center justify-between mb-2">
-                        <span className="text-2xl font-bold">{Math.round((metrics.utilization) * 100)}%</span>
+                        <span className="text-2xl font-bold">{(metrics.utilization) * 100}%</span>
                         <span className={`text-sm ${isSystemStable ? "text-green-500" : "text-red-500"}`}>
                             {isSystemStable ? "System Stable" : "System Unstable"}
                         </span>
@@ -100,12 +100,12 @@ const MetricsDisplay = ({ metrics }) => {
                     <CardTitle className="text-sm font-medium">Server Idle Time</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div className="text-2xl font-bold mb-2">{Math.round((metrics.idle) * 100)}%</div>
+                    <div className="text-2xl font-bold mb-2">{((metrics.idle) * 100)}%</div>
                     <div className="w-full h-2 bg-[#f1f5f9] rounded-full overflow-hidden relative">
                         <div
                             className={`h-full transition-all duration-300 ${metrics.rho >= 1 ? "bg-red-100" : "bg-black"
                                 }`}
-                            style={{ width: `${Math.min(metrics.idle * 100, 100) ?? 0}%` }}
+                            style={{ width: `${((metrics.idle) * 100)}%` }}
                         >
                         </div>
                     </div>
@@ -122,8 +122,8 @@ const MetricsDisplay = ({ metrics }) => {
                 </CardHeader>
                 <CardContent>
                     <div className="flex items-center justify-between mb-2">
-                    <span className="text-2xl font-bold">{metrics.rho?.toFixed(4)}</span>
-                    <span className={`text-sm ${metrics.rho < 1 ? "text-green-500" : "text-red-500"}`}>
+                        <span className="text-2xl font-bold">{metrics.rho?.toFixed(4)}</span>
+                        <span className={`text-sm ${metrics.rho < 1 ? "text-green-500" : "text-red-500"}`}>
                             {metrics.rho < 1 ? "Queue will not grow indefinitely" : "Queue will grow indefinitely"}
                         </span>
                     </div>

@@ -140,7 +140,9 @@ export const mgcQueueing = (arrivalMean, serviceMean, serviceVariance, servers) 
         let Ca2 = 1; // Poisson arrivals
 
         // Get M/M/c metrics
-        let [LqMMC, , , , p0] = mmcQueueing(arrivalMean, serviceMean, servers);
+        let MMC = mmcQueueing(arrivalMean, serviceMean, servers);
+        let LqMMC = MMC.lq
+        let p0 = MMC.idle
         if (LqMMC === null) return null;
 
         // Adjust for M/G/c using approximation
@@ -178,7 +180,11 @@ export const ggcQueueing = (arrivalMean, arrivalVariance, serviceMean, serviceVa
         let Cs2 = serviceVariance / (serviceMean ** 2);
 
         // Get M/G/c Lq as a base (which uses M/M/c adjusted for Cs2)
-        let [LqMGC, , , , p0] = mgcQueueing(arrivalMean, serviceMean, serviceVariance, servers);
+        // let [LqMGC, , , , p0] = mgcQueueing(arrivalMean, serviceMean, serviceVariance, servers);
+
+        let MGC = mgcQueueing(arrivalMean, serviceMean, serviceVariance, servers);
+        let LqMGC = MMC.lq
+        let p0 = MMC.idle
         if (LqMGC === null) return null;
 
         // Adjust Wq for general arrivals
